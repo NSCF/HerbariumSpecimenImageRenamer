@@ -35,6 +35,31 @@ namespace HerbariumSpecimenImageRenamer
             this.wd = Path.GetDirectoryName(txtExcelFile.Text);
 
             this.readExcelFile();
+
+            //check that there are not duplicate names in the Excel file
+            //from https://stackoverflow.com/questions/454601/how-to-count-duplicates-in-list-with-linq
+            var counts = from x in this.newFileNames
+                    group x by x into g
+                    let count = g.Count()
+                    orderby count descending
+                    select new { Value = g.Key, Count = count };
+
+            if (counts.Any(x =>x.Count > 1))
+            {
+                string message = "There are duplicate names in the spreadsheet. Please check and correct these as each specimen should have a unique code/number" + Environment.NewLine + Environment.NewLine;
+
+                var duplicates = counts.Where(x => x.Count > 1);
+                foreach (var duplicate in duplicates)
+                {
+                    message += duplicate.Value + ": " + duplicate.Count + Environment.NewLine;
+                }
+
+                MessageBox.Show(message);
+
+                return;
+
+            }
+
             this.oldFileNames = Directory.GetFiles(this.wd).ToList();
 
             //remove the name of the excel file
