@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HerbariumSpecimenImageRenamer", "HerbariumSpecimenImageRenamer\HerbariumSpecimenImageRenamer.csproj", "{C76C98E0-0B61-42CE-B882-82B6D9662A86}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{0642ED7E-5BD1-4F64-931D-0D8CC0D32888}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ImageRenamerSetup", "Setup1\Setup1.vdproj", "{0642ED7E-5BD1-4F64-931D-0D8CC0D32888}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,8 +13,8 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C76C98E0-0B61-42CE-B882-82B6D9662A86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C76C98E0-0B61-42CE-B882-82B6D9662A86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C76C98E0-0B61-42CE-B882-82B6D9662A86}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{C76C98E0-0B61-42CE-B882-82B6D9662A86}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{C76C98E0-0B61-42CE-B882-82B6D9662A86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C76C98E0-0B61-42CE-B882-82B6D9662A86}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0642ED7E-5BD1-4F64-931D-0D8CC0D32888}.Debug|Any CPU.ActiveCfg = Debug

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using NPOI.XSSF.UserModel;
 using NPOI.SS.UserModel;
+using System.Text.RegularExpressions;
 
 namespace HerbariumSpecimenImageRenamer
 {
@@ -32,6 +33,19 @@ namespace HerbariumSpecimenImageRenamer
 
         private void btnRenameFiles_Click(object sender, EventArgs e)
         {
+
+            //just in case
+            if(this.oldFileNames != null)
+            {
+                this.oldFileNames.Clear();
+            }
+            
+            if(this.newFileNames != null)
+            {
+                this.newFileNames.Clear();
+            }
+            
+            //then
             this.wd = Path.GetDirectoryName(txtExcelFile.Text);
 
             this.readExcelFile();
@@ -65,6 +79,13 @@ namespace HerbariumSpecimenImageRenamer
             //remove the name of the excel file
             this.oldFileNames.Remove(this.txtExcelFile.Text);
 
+            //check if the excel file is open!
+            Regex re = new Regex(@"\$.*\.xls[x]*$");
+            if(this.oldFileNames.Any(x => re.IsMatch(x.ToLower())))
+            {
+                MessageBox.Show("It looks like the spreadsheet is open or there is a ~$ version in the folder. Make sure the file is closed and there is no ~$ file in the directory. Please check and try again");
+                return;
+            }
             //check if the numbers match
             if (this.newFileNames.Count != this.oldFileNames.Count)
             {
@@ -110,9 +131,15 @@ namespace HerbariumSpecimenImageRenamer
                     {
                         // skip header row
                         if (rowIndex++ == 0) continue;
-                        string rowFileName = row.GetCell(0).ToString().Trim(); //remove full stops if there are any
 
+                        ICell cell = row.GetCell(0);
+                        if (cell == null)
+                        {
+                            break; //we assume that an empty cell means end of the list. 
+                        }
+                        string rowFileName = cell.ToString().Trim(); //remove full stops if there are any
                         this.newFileNames.Add(rowFileName);
+
                     }
                 }
             }
